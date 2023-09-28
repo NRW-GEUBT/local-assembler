@@ -1,10 +1,10 @@
 site_name: local-assembler
-site_url: https://nrw-geubt.github.io/local-assembler/
-site_description: Lacal sequenceassemblyandquality control module of NRW-Geübt
+site_url: http://nrw-geubt.github.io/local-assembler/
+site_description: Local sequence assembly and quality control module of NRW-Geübt
 site_author: Gregoire Denay
 copyright: BSD 3-Clause license
 
-repo_url: https://nrw-geubt.github.io/local-assembler/
+repo_url: http://github.com/NRW-GEUBT/local-assembler
 
 nav:
   - Welcome: index.md
