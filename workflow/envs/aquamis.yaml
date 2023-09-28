@@ -1,0 +1,7 @@
+name: aquamis
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - aquamis=1.4.0

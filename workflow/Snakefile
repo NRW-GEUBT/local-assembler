@@ -28,13 +28,16 @@ include: "rules/common.smk"
 
 rule all:
     input:
-        "",
+        "aquamis/reports/summary_report.tsv",
+        "geuebt_export/metadata.tsv",
+        "nrls_export/sucess.flag",
 
 
 # Includes --------------------------------------------------------------------
 
 
-include: ""
+include: "rules/aquamis.smk"
+include: "rules/exports.smk"
 
 
 # Workflow --------------------------------------------------------------------
@@ -42,7 +45,7 @@ include: ""
 
 
 onstart:
-    print(f"\nYou are using <REPO NAME> version: {version}")
+    print(f"\nYou are using LOCAL ASSEMBLER version: {version}")
     with open(pipe_log, "a") as f:
         f.write(f"[{get_local_time()}]: Pipeline started\n")
 
@@ -66,7 +69,7 @@ onerror:
     print(
         f"\nAn error occured, please consider filing an bug report."
         f"\n"
-        f"\nIssue tracker: <ISSUE LINK>"
+        f"\nIssue tracker: https://github.com/NRW-GEUBT/local-assembler/issues"
     )
     with open(pipe_log, "a") as f:
         f.write(f"[{get_local_time()}]: Pipeline stopped on error\n")

@@ -1,0 +1,320 @@
+{
+  "metadata": {
+    "os": ["Linux"],
+    "node": ["debian"],
+    "user": ["debian"],
+    "timestamp": ["2023-09-11 11:23:00 CEST"],
+    "comments": "Downsized and modified version of the QC thresholds for the Geübt application, following ASU L 00.00-183 recomendations. This version is limited to the species covered by Geübt.",
+    "help": "0, 1, 2 are PASS WARNING FAIL respectively"
+  },
+  "thresholds": {
+    "all Species": {
+      "busco_duplicates": [
+        {
+          "source": "BfR_default",
+          "interval": [0.05],
+          "binscore": [0, 1],
+          "bincolor": ["#81B294", "#F2CC8F"]
+        }
+      ],
+      "busco_single": [
+        {
+          "source": "BfR_default",
+          "interval": [0.95],
+          "binscore": [1, 0],
+          "bincolor": ["#F2CC8F", "#81B294"]
+        }
+      ],
+      "ContamStatus": [
+        {
+          "source": "BfR_default",
+          "interval": [1, 2],
+          "binscore": [0, 1, 2],
+          "bincolor": ["#81B294", "#E07A5F", "#E07A5F"]
+        }
+      ],
+      "contig_hit1_genus_fraction": [
+        {
+          "source": "BfR_default",
+          "interval": [0.95],
+          "binscore": [2, 0],
+          "bincolor": ["#E07A5F", "#81B294"]
+        }
+      ],
+      "contig_hit1_species_fraction": [
+        {
+          "source": "BfR_default",
+          "interval": [0.95],
+          "binscore": [2, 0],
+          "bincolor": ["#E07A5F", "#81B294"]
+        }
+      ],
+      "mlst_multi_allele_loci": [
+        {
+          "source": "BfR_default",
+          "interval": [1],
+          "binscore": [0, 2],
+          "bincolor": ["#81B294", "#E07A5F"]
+        }
+      ],
+      "NumContamSNVs": [
+        {
+          "source": "BfR_default",
+          "interval": [2, 3],
+          "binscore": [0, 1, 2],
+          "bincolor": ["#81B294", "#F2CC8F", "#E07A5F"]
+        }
+      ],
+      "q30_rate_after": [
+        {
+          "source": "BfR_default",
+          "interval": [0.7, 0.8],
+          "binscore": [2, 1, 0],
+          "bincolor": ["#E07A5F", "#F2CC8F", "#81B294"]
+        }
+      ],
+      "qc_FAIL": [
+        {
+          "source": "BfR_default",
+          "interval": [0.5],
+          "binscore": [0, 2],
+          "bincolor": ["#81B294", "#E07A5F"]
+        }
+      ],
+      "qc_NA": [
+        {
+          "source": "BfR_default",
+          "interval": [0.5],
+          "binscore": [0, 2],
+          "bincolor": ["#81B294", "#F2CC8F"]
+        }
+      ],
+      "qc_VOTE": [
+        {
+          "source": "BfR_default",
+          "interval": [1],
+          "binscore": [0, 2],
+          "bincolor": ["#81B294", "#E07A5F"]
+        }
+      ],
+      "qc_WARNING": [
+        {
+          "source": "BfR_default",
+          "interval": [0.5],
+          "binscore": [0, 2],
+          "bincolor": ["#81B294", "#F2CC8F"]
+        }
+      ],
+      "read_hit1_genus_fraction": [
+        {
+          "source": "BfR_default",
+          "interval": [0.95],
+          "binscore": [2, 0],
+          "bincolor": ["#E07A5F", "#81B294"]
+        }
+      ],
+      "read_hit1_species_fraction": [
+        {
+          "source": "BfR_default",
+          "interval": [0.95],
+          "binscore": [2, 0],
+          "bincolor": ["#E07A5F", "#81B294"]
+        }
+      ]
+    },
+    "Campylobacter": {
+      "# contigs (>= 1000 bp)": [
+        {
+          "source": "ASU L 00.00-183",
+          "interval": [300],
+          "binscore": [0, 1],
+          "bincolor": ["#81B294", "#F2CC8F"]
+        }
+      ],
+      "assembly_coverageDepth": [
+        {
+          "source": "ASU L 00.00-183",
+          "interval": [20, 30, 200],
+          "binscore": [2, 1, 0, 2],
+          "bincolor": ["#E07A5F", "#F2CC8F", "#81B294", "#E07A5F"]
+        }
+      ],
+      "busco_single": [
+        {
+          "source": "Curated_Genus_specific_BfR",
+          "interval": [0.7999],
+          "binscore": [1, 0],
+          "bincolor": ["#F2CC8F", "#81B294"]
+        }
+      ],
+      "GC (%)": [
+        {
+          "source": "ASU L 00.00-183",
+          "interval": [26.4, 35.3],
+          "binscore": [1, 0, 1],
+          "bincolor": ["#F2CC8F", "#81B294", "#F2CC8F"]
+        }
+      ],
+      "NumContamSNVs": [
+        {
+          "source": "Curated_Genus_specific_BfR",
+          "interval": [1, 2],
+          "binscore": [0, 1, 2],
+          "bincolor": ["#81B294", "#F2CC8F", "#E07A5F"]
+        }
+      ],
+      "Total length": [
+        {
+          "source": "ASU L 00.00-183",
+          "interval": [1500000, 1454000, 1891000, 1900000],
+          "binscore": [2, 1, 0, 1, 2],
+          "bincolor": ["#E07A5F", "#F2CC8F", "#81B294", "#F2CC8F", "#E07A5F"],
+          "expansionFactor": [0.05]
+        }
+      ]
+    },
+    "Escherichia": {
+      "GC (%)": [
+        {
+          "source": "ASU L 00.00-183",
+          "interval": [46.6, 54.6],
+          "binscore": [1, 0, 1],
+          "bincolor": ["#F2CC8F", "#81B294", "#F2CC8F"]
+        }
+      ],
+      "NumContamSNVs": [
+        {
+          "source": "Curated_Genus_specific_BfR",
+          "interval": [3, 4],
+          "binscore": [0, 1, 2],
+          "bincolor": ["#81B294", "#F2CC8F", "#E07A5F"]
+        }
+      ]
+    },
+    "Escherichia coli": {
+      "# contigs (>= 1000 bp)": [
+        {
+          "source": "ASU L 00.00-183",
+          "interval": [500],
+          "binscore": [0, 1],
+          "bincolor": ["#81B294", "#F2CC8F"]
+        }
+      ],
+      "assembly_coverageDepth": [
+        {
+          "source": "ASU L 00.00-183",
+          "interval": [40, 50, 200],
+          "binscore": [2, 1, 0, 2],
+          "bincolor": ["#E07A5F", "#F2CC8F", "#81B294", "#E07A5F"]
+        }
+      ],
+      "GC (%)": [
+        {
+          "source": "ASU L 00.00-183",
+          "interval": [46.6, 54.6],
+          "binscore": [1, 0, 1],
+          "bincolor": ["#F2CC8F", "#81B294", "#F2CC8F"]
+        }
+      ],
+      "Total length": [
+        {
+          "source": "ASU L 00.00-183",
+          "interval": [4500000, 4909000, 5493000, 5900000],
+          "binscore": [2, 1, 0, 1, 2],
+          "bincolor": ["#E07A5F", "#F2CC8F", "#81B294", "#F2CC8F", "#E07A5F"],
+          "expansionFactor": [0.05]
+        }
+      ]
+    },
+    "Listeria": {
+      "NumContamSNVs": [
+        {
+          "source": "Curated_Genus_specific_BfR",
+          "interval": [2, 3],
+          "binscore": [0, 1, 2],
+          "bincolor": ["#81B294", "#F2CC8F", "#E07A5F"]
+        }
+      ]
+    },
+    "Listeria monocytogenes": {
+      "# contigs (>= 1000 bp)": [
+        {
+          "source": "ASU L 00.00-183",
+          "interval": [300],
+          "binscore": [0, 1],
+          "bincolor": ["#81B294", "#F2CC8F"]
+        }
+      ],
+      "assembly_coverageDepth": [
+        {
+          "source": "ASU L 00.00-183",
+          "interval": [20, 30, 200],
+          "binscore": [2, 1, 0, 2],
+          "bincolor": ["#E07A5F", "#F2CC8F", "#81B294", "#E07A5F"]
+        }
+      ],
+      "GC (%)": [
+        {
+          "source": "ASU L 00.00-183",
+          "interval": [33.9, 41.9],
+          "binscore": [1, 0, 1],
+          "bincolor": ["#F2CC8F", "#81B294", "#F2CC8F"]
+        }
+      ],
+      "Total length": [
+        {
+          "source": "ASU L 00.00-183",
+          "interval": [2700000, 2918000, 3156000, 3200000],
+          "binscore": [2, 1, 0, 1, 2],
+          "bincolor": ["#E07A5F", "#F2CC8F", "#81B294", "#F2CC8F", "#E07A5F"],
+          "expansionFactor": [0.05]
+        }
+      ]
+    },
+    "Salmonella": {
+      "NumContamSNVs": [
+        {
+          "source": "Curated_Genus_specific_BfR",
+          "interval": [6, 7],
+          "binscore": [0, 1, 2],
+          "bincolor": ["#81B294", "#F2CC8F", "#E07A5F"]
+        }
+      ]
+    },
+    "Salmonella enterica": {
+      "# contigs (>= 1000 bp)": [
+        {
+          "source": "ASU L 00.00-183",
+          "interval": [300],
+          "binscore": [0, 1],
+          "bincolor": ["#81B294", "#F2CC8F"]
+        }
+      ],
+      "assembly_coverageDepth": [
+        {
+          "source": "ASU L 00.00-183",
+          "interval": [30, 40, 200],
+          "binscore": [2, 1, 0, 2],
+          "bincolor": ["#E07A5F", "#F2CC8F", "#81B294", "#E07A5F"]
+        }
+      ],
+      "GC (%)": [
+        {
+          "source": "ASU L 00.00-183",
+          "interval": [48.1, 56.1],
+          "binscore": [1, 0, 1],
+          "bincolor": ["#F2CC8F", "#81B294", "#F2CC8F"]
+        }
+      ],
+      "Total length": [
+        {
+          "source": "ASU L 00.00-183",
+          "interval": [4300000, 4627000, 5006000, 5200000],
+          "binscore": [2, 1, 0, 1, 2],
+          "bincolor": ["#E07A5F", "#F2CC8F", "#81B294", "#F2CC8F", "#E07A5F"],
+          "expansionFactor": [0.05]
+        }
+      ]
+    }
+  }
+}

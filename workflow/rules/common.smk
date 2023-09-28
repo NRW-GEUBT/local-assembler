@@ -1,5 +1,6 @@
 import os
 import time
+import pandas as pd
 from snakemake.utils import validate
 
 
@@ -8,20 +9,34 @@ version = open(os.path.join(workflow.basedir, "..", "VERSION"), "r").read()
 pipe_log = os.path.join(os.getcwd(), "PIPELINE_STATUS")
 
 
-# Validating config ----------------------------------
-validate(config, schema="../schema/config.schema.yaml")
-
-
 # General puprose functions --------------------------
 def get_local_time():
     return time.asctime(time.localtime(time.time()))
 
 
-# Input functions ------------------------------------
-def aggregate_samples(wildcards):
-    checkpoint_output = checkpoints.checkpoint_name.get(**wildcards).output[0]
-    ids_map = glob_wildcards(
-        os.path.join(checkpoint_output, "{wildcard_name}.fa")
-    ).wildcard_name
-    return expand("file/path/pattern/{wildcard_name}.ext", wildcard_name=ids_map)
+def validate_input_param(path, schema):
+    df = pd.read_csv(path, index_col=False, sep="\t", engine="python")
+    validate(df, schema=schema)
 
+
+# Input functions ------------------------------------
+def aggregate_assemblies(wildcards):
+    checkpoint_output = checkpoints.aquamis.get(**wildcards).output["assdir"]
+    ids_map = glob_wildcards(
+        os.path.join(checkpoint_output, "{sample_id}.fasta")
+    ).sample_id
+    return expand("geuebt_export/{sample_id}.fasta", sample_id=ids_map)
+
+
+# Validation
+validate(config, schema="../schema/config.schema.yaml")
+# Fix snakemake not checking the workdir in gh actions
+try:
+    validate_input_param(config["metadata"], schema="../schema/metadata.schema.json")
+except FileNotFoundError:
+    validate_input_param(
+        os.path.join(
+            workflow.basedir, "..", ".tests", "integration", config["metadata"]
+        ),
+        schema="../schema/metadata.schema.json",
+    )

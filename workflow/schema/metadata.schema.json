@@ -1,0 +1,99 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "required": [
+        "isolate_id",
+        "sample_id",
+        "organism",
+        "isolation_org",
+        "sequencing_org",
+        "bioinformatics_org",
+        "third_party_flag",
+        "sample_type",
+        "collection_date",
+        "collection_municipality",
+        "collection_country",
+        "collection_cause",
+        "collected_by",
+        "designation",
+        "manufacturer_type",
+        "sample_description"
+    ],
+    "properties": {
+        "isolate_id": {
+            "type": "string",
+            "pattern": "^(19[9-9][0-9]|2[0-1][0-4][0-9]|2150)-[0-9]{7}(-[0-9]{2})?$"
+        },
+        "sample_id": {
+            "type": "string",
+            "pattern": "^(19[9-9][0-9]|2[0-1][0-4][0-9]|2150)-[0-9]{7}(-[0-9]{2})?$"
+        },
+        "organism": {
+            "type": "string",
+            "enum": ["Listeria monocytogenes", "Salmonella enterica", "Campylobacter spp.", "Escherichia coli"]
+        },
+        "isolation_org": {
+            "type": "string",
+            "enum": ["RRW", "OWL", "WFL", "RLD", "MEL", "unknown"]
+        },
+        "sequencing_org": {
+            "type": "string",
+            "enum": ["RRW", "OWL", "WFL", "RLD", "MEL", "unknown"]
+        },
+        "bioinformatics_org": {
+            "type": "string",
+            "enum": ["RRW", "OWL", "WFL", "RLD", "MEL", "unknown"]
+        },
+        "third_party_flag": {
+            "type": "boolean"
+        },
+        "sample_type": {
+            "type": "string",
+            "enum":  ["lebensmittel", "futtermittel", "tier", "umfeld", "human", "ringtrial", "unknown"]
+        },
+        "collection_date": {
+            "type": "string",
+            "anyOf": [
+                {"format": "date"},
+                {"enum": ["unknown"]}
+            ]
+        },
+        "collection_municipality": {
+            "type": "string"
+        },
+        "collection_country": {
+            "type": "string",
+            "anyOf": [
+                {"pattern": "^([A-Z]{2}|unknown)$"},
+                {"enum": ["unknown"]}
+            ]
+        },
+        "collection_cause": {
+            "type": "string"
+        },
+        "collected_by": {
+            "type": "string"
+        },
+        "designation": {
+            "type": "string"
+        },
+        "manufacturer_type": {
+            "type": "string"
+        },
+        "sample_description": {
+            "type": "string"
+        }
+    },
+    "allOf": [
+        {
+            "if": {
+                "properties": { "third_party_flag": { "const": true} },
+                "required": ["third_party_flag"]
+            },
+            "then": {
+                "properties": { "third_party_owner": { "type": "string" } },
+                "required": ["third_party_owner"]
+            }
+        }
+    ]
+}
