@@ -35,6 +35,8 @@ def main(assemblies, summary, metadata_in, metadata_out):
     # load metadata and summary
     metatbl = pd.read_csv(metadata_in, sep="\t", index_col="isolate_id")
     sumtbl = pd.read_csv(summary, sep="\t", index_col="Sample_Name")
+    # Insert assembly method
+    metatbl['assembly_method'] = "AQUAMIS"
     # for each assembly
     for assembly in assemblies:
         fastaname = os.path.basename(assembly)
