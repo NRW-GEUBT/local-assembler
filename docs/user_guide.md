@@ -95,6 +95,10 @@ File naming should explicitely follow one the 4 schemes:
 This naming convention is used to generate a sample sheet with the AQUAMIS `create_sampleSheet` helper.
 See the documentation directly in the AQUAMIS repository.
 
+Note that the workflow will expect fastq to be named after either the value of the `isolate_name_alt` if it is filled
+or the value of the `isolate_id` field if `isolate_name_alt` is empty. If a fastq has a name that is not in these fields,
+the workflow will stop with an error.
+
 ## Metadata
 
 Metadata hould be provided as a table ina a flat text format, using tab separators.
@@ -102,10 +106,10 @@ The table must contain following fields, not all of which must be filled:
 
 | Field  | Description | Required |
 |---|---|---|
-| isolate_id | Unique data identification in database | required |
+| isolate_id | Unique isolate identification in database | required |
 | sample_id | Unique sample identification for epidemiological analysis | required |
 | organims | Sample categorization for downstream analysis | required |
-| isolate_name_alt | Laboratory internal name | optional |
+| isolate_name_alt | Laboratory internal name (unique for each isolate) | optional |
 | isolation_org | Contact organisation for isolate | required |
 | sequencing_org | Contact organisation for sequencing | required |
 | extraction_method | Extraction method name | optional |

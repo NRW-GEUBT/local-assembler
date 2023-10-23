@@ -1,0 +1,3 @@
+isolate_id	sample_id	organism	isolate_name_alt	isolation_org	sequencing_org	extraction_method	library_method	sequencing_instrument	bioinformatics_org	third_party_flag	third_party_owner	sample_type	collection_date	collection_municipality	collection_country	collection_cause	collected_by	manufacturer	designation	manufacturer_type	sample_description	lot_number
+2016-0000962-01	2016-0000962	Listeria monocytogenes		unknown	RRW				RRW	TRUE	BfR	unknown	01.01.2016	unknown	DE	lebensmittel	unknown		unknown	unknown	unkown	
+2016-0000962-02	2016-0000962	Listeria monocytogenes	16-LI00962-0	unknown	RRW				RRW	TRUE	BfR	unknown	01.01.2016	unknown	DE	lebensmittel	unknown		unknown	unknown	unkown	

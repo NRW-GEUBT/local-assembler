@@ -1,3 +1,9 @@
+### 0.2.0
+
+The workflow will expect fastq to be named after either the value of the `isolate_name_alt` if it is filled
+or the value of the `isolate_id` field if `isolate_name_alt` is empty. If a fastq has a name that is not in these fields,
+the workflow will stop with an error.
+
 ### 0.1.1
 
 Add missing metadata field "assembly_method" in metadata JSON for geuebt export

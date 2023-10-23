@@ -55,10 +55,12 @@ def main(metadata, ssheet, outdir):
         for row in tbl.iterrows():  # yields (index, Series)
             for fastqpath in (row[1]["fq1"], row[1]["fq2"]):
                 filename = os.path.basename(fastqpath)
+                # rename files with isolate_id
+                filename_id = filename.replace(row[1]["fastq_name"], row[0])
                 # copy fastq
-                shutil.copy(fastqpath, os.path.join(outdir, species, filename))
+                shutil.copy(fastqpath, os.path.join(outdir, species, filename_id))
                 # get checksum
-                checksums.append(f"{md5(fastqpath)}  {filename}")
+                checksums.append(f"{md5(fastqpath)}  {filename_id}")
             # create a one row df for metadata
             metanrl.append(pd.DataFrame.from_dict(
                 {row[0]: [

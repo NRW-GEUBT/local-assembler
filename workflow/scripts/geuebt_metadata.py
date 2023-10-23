@@ -46,7 +46,9 @@ def main(assemblies, summary, metadata_in, metadata_out):
             raise KeyError(
                 f"There is not information on sample '{name}' in the metadata table, "
                 f"althought valid FASTQs were provided. "
-                f"Ensure the completness of the submitted metadata."
+                f"Ensure the completness of the submitted metadata. "
+                f"The workflow will expect fastq to be named after either the value "
+                f"the `isolate_id` field if `isolate_name_alt` is empty."
             )
         # iof QC fail skip sample
         if sumtbl.at[name, "QC_Vote"] == "FAIL":

@@ -23,9 +23,24 @@ rule create_sample_sheet:
         """
 
 
-checkpoint aquamis:
+rule consolidate_ids:
     input:
         sample_sheet="sample_sheet/samples.tsv",
+    params:
+        metadata=config["metadata"],
+    output:
+        sample_sheet="sample_sheet/samples_isolate_ids.tsv",
+    conda:
+        "../envs/pandas.yaml"
+    log:
+        "logs/consolidate_ids.log",
+    script:
+        "../scripts/consolidate_ids.py"
+
+
+checkpoint aquamis:
+    input:
+        sample_sheet="sample_sheet/samples_isolate_ids.tsv",
     output:
         outdir=directory("aquamis"),
         summary="aquamis/reports/summary_report.tsv",
