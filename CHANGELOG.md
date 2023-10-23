@@ -1,3 +1,7 @@
+### 0.2.1
+
+Relaxed regex for sample naming, subsample number now accepts tow to many digits (eg. 2023-0001254-01 or 2023-0001254-5236)
+
 ### 0.2.0
 
 The workflow will expect fastq to be named after either the value of the `isolate_name_alt` if it is filled
