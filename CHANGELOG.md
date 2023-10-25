@@ -1,3 +1,7 @@
+### 0.2.2
+
+Does not export fastas failing QC anymore
+
 ### 0.2.1
 
 Relaxed regex for sample naming, subsample number now accepts tow to many digits (eg. 2023-0001254-01 or 2023-0001254-5236)

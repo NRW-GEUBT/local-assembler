@@ -2,36 +2,21 @@
 # for export to geuebt, NRLs, etc...
 
 
-rule geuebt_assemblies:
+rule geuebt_export:
     input:
-        ass="aquamis/Assembly/assembly/{sample_id}.fasta",
-    output:
-        ass="geuebt_export/{sample_id}.fasta",
-    conda:
-        "../envs/pandas.yaml"
-    log:
-        "logs/geuebt_assemblies_{sample_id}.log",
-    shell:
-        """
-        exec 2> {log}
-        cp {input.ass} {output.ass}
-        """
-
-
-rule geuebt_metadata:
-    input:
-        assembly=aggregate_assemblies,
         summary="aquamis/reports/summary_report.tsv",
     output:
         metatbl="geuebt_export/metadata.tsv",
     params:
         metadata=config["metadata"],
+        assembly_path="aquamis/Assembly/assembly/",
+        fasta_destination=lambda w, output: os.path.split(output["metatbl"])[0],
     conda:
         "../envs/pandas.yaml"
     log:
-        "logs/geuebt_metadata.log",
+        "logs/geuebt_export.log",
     script:
-        "../scripts/geuebt_metadata.py"
+        "../scripts/geuebt_export.py"
 
 
 rule nrls_export:

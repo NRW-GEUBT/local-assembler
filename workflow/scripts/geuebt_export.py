@@ -14,7 +14,7 @@ except NameError:
 
 import os
 import hashlib
-from pathlib import Path
+import shutil
 import pandas as pd
 
 
@@ -30,7 +30,7 @@ def md5(fname):
     return hash_md5.hexdigest()
 
 
-def main(assemblies, summary, metadata_in, metadata_out):
+def main(summary, metadata_in, assembly_path, fasta_dest, metadata_out):
     qc = []
     # load metadata and summary
     metatbl = pd.read_csv(metadata_in, sep="\t", index_col="isolate_id")
@@ -38,9 +38,8 @@ def main(assemblies, summary, metadata_in, metadata_out):
     # Insert assembly method
     metatbl['assembly_method'] = "AQUAMIS"
     # for each assembly
-    for assembly in assemblies:
-        fastaname = os.path.basename(assembly)
-        name = Path(fastaname).stem
+    for name in sumtbl.index:
+        fastaname = os.path.join(assembly_path, f"{name}.fasta")
         # Just crash the workflow with a message if metadata are missing
         if name not in metatbl.index:
             raise KeyError(
@@ -53,11 +52,13 @@ def main(assemblies, summary, metadata_in, metadata_out):
         # iof QC fail skip sample
         if sumtbl.at[name, "QC_Vote"] == "FAIL":
             continue
+        # copy files
+        shutil.copy(fastaname, os.path.join(fasta_dest, f"{name}.fasta"))
         # QC values directly as a single row of a dataframe
         qc.append(pd.DataFrame.from_dict(
             {name: [
-                fastaname,
-                md5(assembly),
+                os.path.basename(fastaname),
+                md5(fastaname),
                 sumtbl.at[name, "Coverage_Depth"],
                 sumtbl.at[name, "Reference_Coverage"],
                 sumtbl.at[name, "Q30_Base_Fraction"]
@@ -82,8 +83,9 @@ def main(assemblies, summary, metadata_in, metadata_out):
 
 if __name__ == "__main__":
     main(
-        snakemake.input["assembly"],
         snakemake.input["summary"],
         snakemake.params["metadata"],
+        snakemake.params["assembly_path"],
+        snakemake.params["fasta_destination"],
         snakemake.output["metatbl"],
     )
