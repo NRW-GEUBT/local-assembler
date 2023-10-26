@@ -1,3 +1,8 @@
+### 0.2.3
+
+Confindr "Inter" and "Inter+Intra" contamination now only result in a warning. This warning will transform in a fail only in combination with SNV or kraken fails.
+THis behavior is consistent with the latest BfR thresholds.
+
 ### 0.2.2
 
 Does not export fastas failing QC anymore

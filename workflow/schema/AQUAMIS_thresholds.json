@@ -28,9 +28,9 @@
       "ContamStatus": [
         {
           "source": "BfR_default",
-          "interval": [1, 2],
-          "binscore": [0, 1, 2],
-          "bincolor": ["#81B294", "#E07A5F", "#E07A5F"]
+          "interval": [1],
+          "binscore": [0, 1],
+          "bincolor": ["#81B294", "#F2CC8F"]
         }
       ],
       "contig_hit1_genus_fraction": [
