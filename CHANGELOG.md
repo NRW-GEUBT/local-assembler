@@ -1,3 +1,7 @@
+### 0.2.4
+
+Modified the naming of FASTQ files for NRLs export to match the SequenzD field +read orientation tag
+
 ### 0.2.3
 
 Confindr "Inter" and "Inter+Intra" contamination now only result in a warning. This warning will transform in a fail only in combination with SNV or kraken fails.

@@ -21,7 +21,7 @@ rule geuebt_export:
 
 rule nrls_export:
     input:
-        # using geuebt table here becaus it's already qc checked
+        # using geuebt table here because it's already qc checked
         metadata="geuebt_export/metadata.tsv",
         ssheet="sample_sheet/samples_isolate_ids.tsv",
     output:
