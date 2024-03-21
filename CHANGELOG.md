@@ -1,3 +1,8 @@
+### 0.3.0
+
+Update Metadtaa to GeÜBT v2
+Relaxed validation to accomodate with untypical Sample and isolate naming
+
 ### 0.2.4
 
 Modified the naming of FASTQ files for NRLs export to match the SequenzD field +read orientation tag

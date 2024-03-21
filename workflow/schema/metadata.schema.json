@@ -8,25 +8,20 @@
         "isolation_org",
         "sequencing_org",
         "bioinformatics_org",
-        "third_party_flag",
         "sample_type",
         "collection_date",
-        "collection_municipality",
-        "collection_country",
-        "collection_cause",
-        "collected_by",
-        "designation",
-        "manufacturer_type",
-        "sample_description"
+        "customer",
+        "manufacturer",
+        "collection_place",
+        "collection_place_code",
+        "description"
     ],
     "properties": {
         "isolate_id": {
-            "type": "string",
-            "pattern": "^(19[9-9][0-9]|2[0-1][0-4][0-9]|2150)-[0-9]{7}(-[0-9]{2,})?$"
+            "type": "string"
         },
         "sample_id": {
-            "type": "string",
-            "pattern": "^(19[9-9][0-9]|2[0-1][0-4][0-9]|2150)-[0-9]{7}(-[0-9]{2,})?$"
+            "type": "string"
         },
         "organism": {
             "type": "string",
@@ -34,22 +29,19 @@
         },
         "isolation_org": {
             "type": "string",
-            "enum": ["RRW", "OWL", "WFL", "RLD", "MEL", "unknown"]
+            "enum": ["RRW", "OWL", "WFL", "RLD", "MEL", "other"]
         },
         "sequencing_org": {
             "type": "string",
-            "enum": ["RRW", "OWL", "WFL", "RLD", "MEL", "unknown"]
+            "enum": ["RRW", "OWL", "WFL", "RLD", "MEL", "other"]
         },
         "bioinformatics_org": {
             "type": "string",
-            "enum": ["RRW", "OWL", "WFL", "RLD", "MEL", "unknown"]
-        },
-        "third_party_flag": {
-            "type": "boolean"
+            "enum": ["RRW", "OWL", "WFL", "RLD", "MEL", "other"]
         },
         "sample_type": {
             "type": "string",
-            "enum":  ["lebensmittel", "futtermittel", "tier", "umfeld", "human", "ringtrial", "unknown"]
+            "enum":  ["Lebensmittel", "Futtermittel", "Tiergesundheit", "Umfeld", "Human", "unknown"]
         },
         "collection_date": {
             "type": "string",
@@ -58,42 +50,20 @@
                 {"enum": ["unknown"]}
             ]
         },
-        "collection_municipality": {
+        "customer": {
             "type": "string"
         },
-        "collection_country": {
-            "type": "string",
-            "anyOf": [
-                {"pattern": "^([A-Z]{2}|unknown)$"},
-                {"enum": ["unknown"]}
-            ]
-        },
-        "collection_cause": {
+        "manufacturer": {
             "type": "string"
         },
-        "collected_by": {
+        "collection_place": {
             "type": "string"
         },
-        "designation": {
+        "collection_place_code": {
             "type": "string"
         },
-        "manufacturer_type": {
-            "type": "string"
-        },
-        "sample_description": {
+        "description": {
             "type": "string"
         }
-    },
-    "allOf": [
-        {
-            "if": {
-                "properties": { "third_party_flag": { "const": true} },
-                "required": ["third_party_flag"]
-            },
-            "then": {
-                "properties": { "third_party_owner": { "type": "string" } },
-                "required": ["third_party_owner"]
-            }
-        }
-    ]
+    }
 }

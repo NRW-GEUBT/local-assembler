@@ -59,6 +59,6 @@ checkpoint aquamis:
             --working_directory {output.outdir} \
             --threads {threads} \
             --threads_sample {params.max_threads_sample} \
-            --remove_temp \
+            --remove_temp --ephemeral \
             --qc_thresholds {params.qc_schema}
         """

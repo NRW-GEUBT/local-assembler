@@ -22,7 +22,7 @@ def main(ssheet, metadata, sheetout):
     new_index = []
     # for each fastq pair, check that there is a corresponding entry in metadata
     for sname in sample_sheet.index.to_list():
-        selection = metatbl.loc[metatbl["isolate_name_alt"] == sname]
+        selection = metatbl.loc[metatbl["alt_isolate_id"] == sname]
         if len(selection) == 0:
             selection = metatbl.loc[metatbl["isolate_id"] == sname]
         if len(selection) == 0:
@@ -32,13 +32,13 @@ def main(ssheet, metadata, sheetout):
                 f"althought valid FASTQs were provided. "
                 f"Ensure the completness of the submitted metadata. "
                 f"The workflow will expect fastq to be named after either the value "
-                f"the `isolate_id` field if `isolate_name_alt` is empty."
+                f"the `isolate_id` field if `alt_isolate_id` is empty."
             )
         elif len(selection) > 1:
             # crash if name not unique
             raise not ValueError(
                 f"Several entries for sample name '{sname}' were found in the metadata table. "
-                f" Make sure that both the fields `isolate_id` and `isolate_name_alt` "
+                f" Make sure that both the fields `isolate_id` and `alt_isolate_id` "
                 f"contain unique values"
             )
         else:

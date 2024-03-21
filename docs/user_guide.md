@@ -101,34 +101,41 @@ the workflow will stop with an error.
 
 ## Metadata
 
-Metadata hould be provided as a table ina a flat text format, using tab separators.
+Metadata should be provided as a table in a flat text format, using tab separators.
 The table must contain following fields, not all of which must be filled:
 
-| Field  | Description | Required |
-|---|---|---|
-| isolate_id | Unique isolate identification in database | required |
-| sample_id | Unique sample identification for epidemiological analysis | required |
-| organims | Sample categorization for downstream analysis | required |
-| isolate_name_alt | Laboratory internal name (unique for each isolate) | optional |
-| isolation_org | Contact organisation for isolate | required |
-| sequencing_org | Contact organisation for sequencing | required |
-| extraction_method | Extraction method name | optional |
-| library_method | Library preparation name | optional |
-| sequencing_instrument | Sequencing instrument name | optional |
-| bioinformatics_org | Contact organisation fro bionformatic analysis | required |
-| third_party_flag | Does this isolate belong to a thrid party organisation? | required |
-| thirs_party_owner | Name of the isolate own, required if third_party_flag is TRUE | required |
-| sample_type | Sample category | required |
-| collection_date | Date ofsample collection | required |
-| collection_municipality | Place of sample collection | required |
-| collection_country | Country of sample origin | required |
-| collection_cause | Reason for sample collection | required |
-| collected_by | Local contact for collection | required |
-| manufacturer | Production or husbandery firm or facility | optional |
-| designation | Product category | required |
-| manufacturer_type | Type of production or husbandery facility | required |
-| sample_description | Description of the sample | required |
-| lot_number | Lot / charge number or stable deignation, etc… | optional |
+| Field name             | Definition                                                                                            | Required? | Allowed Values                                                                                 |
+| ---------------------- | ----------------------------------------------------------------------------------------------------- | --------- | ---------------------------------------------------------------------------------------------- |
+| isolate_id             | Eindeutiger Bezeichner der Isolat                                                                     | required  | free text                                                                                      |
+| sample_id              | Eindeutiger Bezeichner der Probe                                                                      | required  | free text                                                                                      |
+| alt_isolate_id         | Alternativer Bezeichnung der Siolat (z.B. Laborrinternenummer)                                        | optional  | free text                                                                                      |
+| organism               | Erwarteter Organismus                                                                                 | required  | oneof "Listeria monocytogenes","Salmonella enterica", "Escherichia coli", "Campylobacter spp." |
+| isolation_org          | Identifizierungsname des für die Isolation verantwortlichen Labor                                     | required  | oneof "OWL", "RRW", "WFL", "RLD","MEL", "other"                                                |
+| sequencing_org         | Identifizierungsname des für die Sequenzierung verantwortlichen Labor                                 | required  | oneof "OWL", "RRW", "WFL", "RLD","MEL", "other"                                                |
+| bioinformatics_org     | Identifizierungsname des für die Primär Analyse verantwortlichen Labor                                | required  | oneof "OWL", "RRW", "WFL", "RLD","MEL", "other"                                                |
+| third_party_owner      | Ggfs. Name der Dritteigentümer (z.B. bei Humanem Isolaten oder RV)                                    | optional  | free text                                                                                      |
+| extraction_method      | Name des Kits oder Methode für die DNA Extraktion                                                     | optional  | free text                                                                                      |
+| library_kit            | Name des Kits für die DNA-Library Erstellung                                                          | optional  | free text                                                                                      |
+| sequencing_kit         | Name des Kits für die DNA Sequenzierung                                                               | optional  | free text                                                                                      |
+| sequencing_instrument  | Model des Gerät für die DNA Sequenzierung                                                             | optional  | free text                                                                                      |
+| assembly_method        | Name und Version des verwendeten Software oder Pipeline für die Assembly                              | optional  | free text                                                                                      |
+| sample_type            | Art der Probe (z.B. Lebensmittel, Umfeldprobe, veterinärmedizinisches Material, usw.)                 | required  | oneof "Lebensmittel", "Futtermittel", "Umfeld", "Tiergesundheit", "Human", "unknown"           |
+| collection_date        | Datum der Probenahme                                                                                  | required  | ISOdate                                                                                        |
+| customer               | Einsendende KOB                                                                                       | required  | Kodierung (2-5 buchstaben)                                                                     |
+| manufacturer           | Hersteller der Probe                                                                                  | required  | Freitext OR  "unknown"                                                                         |
+| collection_place       | Entnahmeort der Probe                                                                                 | required  | AVV / ADV Text                                                                                 |
+| collection_place_code  | Entnahmeort der Probe                                                                                 | required  | AVV / ADV Code                                                                                 |
+| description            | Bezeichnung laut Probeentnahmeschein bzw. bei Tupfern Bezeichnung der Entnahmeortes und ggfs. Tierart | required  | free text                                                                                      |
+| manufacturer_type      | Einordnung des Entnahmeortes nach AVV-Katalog                                                         | optional  | AVV Text                                                                                       |
+| manufacturer_type_code | Einordnung des Entnahmeortes nach AVV-Katalog                                                         | optional  | AVV Code                                                                                       |
+| matrix                 | Einordnung der Probenmatrix nach AVV-Katalog                                                          | optional  | AVV/TSN Text                                                                                   |
+| matrix_code            | Einordnung der Probenmatrix nach AVV-Katalog                                                          | optional  | AVV/TSN Code                                                                                   |
+| collection_cause       | Grund für die Probenahme nach AVV-Katalog                                                             | optional  | AVV Text oder Freitext                                                                         |
+| collection_cause_code  | Grund für die Probenahme nach AVV-Katalog                                                             | optional  | AVV Code                                                                                       |
+| lot_number             | Los-Nr./Chargen-Nr. des Herstellers                                                                   | optional  | free text                                                                                      |
+
+Note that in `local-assembler` no in-depth check of the provided metadata is performed.
+This will however happen during the submission to geuebt-core.
 
 ## Results
 
