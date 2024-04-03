@@ -67,7 +67,7 @@ def main(summary, metadata_in, assembly_path, fasta_dest, metadata_out):
             columns=[
                 "fasta_name",
                 "fasta_md5",
-                "sequencing_depth",
+                "seq_depth",
                 "ref_coverage",
                 "q30"
             ]

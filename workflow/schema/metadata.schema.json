@@ -11,9 +11,6 @@
         "sample_type",
         "collection_date",
         "customer",
-        "manufacturer",
-        "collection_place",
-        "collection_place_code",
         "description"
     ],
     "properties": {
@@ -51,15 +48,6 @@
             ]
         },
         "customer": {
-            "type": "string"
-        },
-        "manufacturer": {
-            "type": "string"
-        },
-        "collection_place": {
-            "type": "string"
-        },
-        "collection_place_code": {
             "type": "string"
         },
         "description": {

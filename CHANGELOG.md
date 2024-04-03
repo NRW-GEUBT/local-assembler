@@ -1,3 +1,7 @@
+### 0.3.1
+
+Fix field seq_depth
+
 ### 0.3.0
 
 Update Metadtaa to GeÜBT v2
