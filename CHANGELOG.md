@@ -1,3 +1,7 @@
+### 0.3.2
+
+Fix consolidation with redundant sample IDs
+
 ### 0.3.1
 
 Fix field seq_depth

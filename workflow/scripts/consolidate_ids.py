@@ -36,7 +36,7 @@ def main(ssheet, metadata, sheetout):
             )
         elif len(selection) > 1:
             # crash if name not unique
-            raise not ValueError(
+            raise ValueError(
                 f"Several entries for sample name '{sname}' were found in the metadata table. "
                 f" Make sure that both the fields `isolate_id` and `alt_isolate_id` "
                 f"contain unique values"
