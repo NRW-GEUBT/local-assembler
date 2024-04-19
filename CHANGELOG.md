@@ -1,3 +1,7 @@
+### 0.3.3
+
+Fix NRL xport convenience tool to correclty expor data by organisms
+
 ### 0.3.2
 
 Fix consolidation with redundant sample IDs

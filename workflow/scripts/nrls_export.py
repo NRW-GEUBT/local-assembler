@@ -19,7 +19,7 @@ import datetime
 import pandas as pd
 
 
-EXPORT_CONDITIONS = ["lebensmittel"]
+EXPORT_CONDITIONS = ["Lebensmittel"]
 
 
 def md5(fname):
@@ -40,22 +40,23 @@ def main(metadata, ssheet, outdir):
     # load metadata and ssheet as df
     metatbl = pd.read_csv(metadata, sep="\t", index_col="isolate_id")
     # Only for subset of sample types !!!
-    selected_meta = metatbl
-    # selected_meta = metatbl[metatbl["sample_type"].isin(EXPORT_CONDITIONS)]
+    selected_meta = metatbl.loc[metatbl["sample_type"].isin(EXPORT_CONDITIONS)]
     ssheet = pd.read_csv(ssheet, sep="\t", index_col="sample")
     # left join on metadata
     tbl = pd.merge(selected_meta, ssheet, how="left", left_index=True, right_index=True)
     # for each species:
     for species in tbl["organism"].unique():
         checksums, metanrl = [], []
-        species = species.replace(" ", "_").replace(".", "")
+        species_fmt = species.replace(" ", "_").replace(".", "")
         # create a subfolder
-        os.makedirs(os.path.join(outdir, species), exist_ok=True)
+        os.makedirs(os.path.join(outdir, species_fmt), exist_ok=True)
+        # select by org
+        subtbl = tbl.loc[tbl["organism"] == species]
         # for each sample:
-        for row in tbl.iterrows():  # yields (index, Series)
+        for row in subtbl.iterrows():  # yields (index, Series)
             for fastqpath in zip([row[1]["fq1"], row[1]["fq2"]], ["R1", "R2"]):
                 # rename files with isolate_id
-                renamed = os.path.join(outdir, species, f"{row[0]}_{fastqpath[1]}.fastq.gz")
+                renamed = os.path.join(outdir, species_fmt, f"{row[0]}_{fastqpath[1]}.fastq.gz")
                 # copy fastq
                 shutil.copy(fastqpath[0], renamed)
                 # get checksum
@@ -135,10 +136,10 @@ def main(metadata, ssheet, outdir):
         # concatenate df
         metaext = pd.concat(metanrl)
         # output both tables
-        with open(os.path.join(outdir, species, f"md5_{species}.txt"), "w") as fo:
+        with open(os.path.join(outdir, species_fmt, f"md5_{species_fmt}.txt"), "w") as fo:
             fo.write("\n".join(checksums))
         metaext.to_csv(
-            os.path.join(outdir, species, f"metadata_{species}.tsv"),
+            os.path.join(outdir, species_fmt, f"metadata_{species_fmt}.tsv"),
             sep="\t",
             header=True,
             index=False
