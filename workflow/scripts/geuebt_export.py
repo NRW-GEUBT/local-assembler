@@ -14,7 +14,6 @@ except NameError:
 
 import os
 import hashlib
-import shutil
 import pandas as pd
 
 
@@ -53,7 +52,7 @@ def main(summary, metadata_in, assembly_path, fasta_dest, metadata_out):
         if sumtbl.at[name, "QC_Vote"] == "FAIL":
             continue
         # copy files
-        shutil.copy(fastaname, os.path.join(fasta_dest, f"{name}.fasta"))
+        os.symlink(fastaname, os.path.join(fasta_dest, f"{name}.fasta"))
         # QC values directly as a single row of a dataframe
         qc.append(pd.DataFrame.from_dict(
             {name: [

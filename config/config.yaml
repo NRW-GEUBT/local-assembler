@@ -13,6 +13,11 @@ fastq_folder: data
 # path to metadata file
 metadata: data/metadata.tsv
 
+# Exports
+# -------
+
+export_nrls: False
+
 # Additional parameters
 # ---------------------
 # max threads per parallel job

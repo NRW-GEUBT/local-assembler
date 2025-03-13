@@ -55,6 +55,7 @@ checkpoint aquamis:
         "logs/run_aquamis.log",
     shell:
         """
+        exec 2> {log}
         aquamis --sample_list {input.sample_sheet} \
             --working_directory {output.outdir} \
             --threads {threads} \

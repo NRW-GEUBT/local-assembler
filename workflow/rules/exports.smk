@@ -33,3 +33,4 @@ rule nrls_export:
         "logs/nrls_export.log",
     script:
         "../scripts/nrls_export.py"
+

@@ -30,13 +30,4 @@ def aggregate_assemblies(wildcards):
 
 # Validation
 validate(config, schema="../schema/config.schema.yaml")
-# Fix snakemake not checking the workdir in gh actions
-try:
-    validate_input_param(config["metadata"], schema="../schema/metadata.schema.json")
-except FileNotFoundError:
-    validate_input_param(
-        os.path.join(
-            workflow.basedir, "..", ".tests", "integration", config["metadata"]
-        ),
-        schema="../schema/metadata.schema.json",
-    )
+

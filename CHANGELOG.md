@@ -1,3 +1,13 @@
+### 1.0.1
+
+- remove metadata validation, this will take place exclusively at the API level
+
+### 1.0.0
+
+- Update to Geübt Metadata V4
+- Export to NRL uses new ADV/AVV template
+- Export reads and assemblies are now symlinks
+
 ### 0.3.3
 
 Fix NRL xport convenience tool to correclty expor data by organisms
