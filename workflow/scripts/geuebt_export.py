@@ -60,6 +60,14 @@ def main(summary, metadata_in, assembly_path, fasta_dest, metadata_out):
             os.symlink(os.path.abspath(fastaname), os.path.join(fasta_dest, f"{name}.fasta"))
 
         # QC values directly as a single row of a dataframe
+        new_cols = [
+                "fasta_name",
+                "fasta_md5",
+                "seq_depth",
+                "ref_coverage",
+                "q30"
+            ]
+
         qc.append(pd.DataFrame.from_dict(
             {name: [
                 os.path.basename(fastaname),
@@ -69,19 +77,14 @@ def main(summary, metadata_in, assembly_path, fasta_dest, metadata_out):
                 sumtbl.at[name, "Q30_Base_Fraction"]
             ]},
             orient="index",
-            columns=[
-                "fasta_name",
-                "fasta_md5",
-                "seq_depth",
-                "ref_coverage",
-                "q30"
-            ]
+            columns=new_cols,
         ))
     # dict to df
     metaext = pd.concat(qc)
     # merge tables (inner join)
+    metatbl = metatbl.drop(labels=new_cols, axis=1, errors='ignore')
     merged = pd.merge(metatbl, metaext, how="inner", left_index=True, right_index=True)
-    merged.index.name = "isolate_id"
+    merged.index.name = 'isolate_id'
     # output
     merged.to_csv(metadata_out, sep="\t", header=True, index=True)
 
