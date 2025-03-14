@@ -57,10 +57,17 @@ def main(metadata, ssheet, outdir):
             for fastqpath in zip([row[1]["fq1"], row[1]["fq2"]], ["R1", "R2"]):
                 # rename files with isolate_id
                 renamed = os.path.join(outdir, species_fmt, f"{row[0]}_{fastqpath[1]}.fastq.gz")
+
                 # Symlink fastq
-                os.symlink(fastqpath[0], renamed)
+                try:
+                    os.symlink(os.path.abspath(fastqpath[0]), renamed)
+                except FileExistsError:
+                    os.remove(renamed)
+                    os.symlink(os.path.abspath(fastqpath[0]), renamed)
+
                 # get checksum
                 checksums.append(f"{md5(renamed)}  {row[0]}_{fastqpath[1]}.fastq.gz")
+
             # create a one row df for metadata
             metanrl.append(pd.DataFrame.from_dict(
                 {row[0]: [

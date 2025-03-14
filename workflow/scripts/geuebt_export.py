@@ -51,8 +51,14 @@ def main(summary, metadata_in, assembly_path, fasta_dest, metadata_out):
         # iof QC fail skip sample
         if sumtbl.at[name, "QC_Vote"] == "FAIL":
             continue
-        # copy files
-        os.symlink(fastaname, os.path.join(fasta_dest, f"{name}.fasta"))
+
+        # link files
+        try:
+            os.symlink(os.path.abspath(fastaname), os.path.join(fasta_dest, f"{name}.fasta"))
+        except FileExistsError:
+            os.remove(os.path.join(fasta_dest, f"{name}.fasta"))
+            os.symlink(os.path.abspath(fastaname), os.path.join(fasta_dest, f"{name}.fasta"))
+
         # QC values directly as a single row of a dataframe
         qc.append(pd.DataFrame.from_dict(
             {name: [

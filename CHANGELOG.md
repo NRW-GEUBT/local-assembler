@@ -1,3 +1,7 @@
+### 1.0.2
+
+- Symlinks are now absolute paths
+
 ### 1.0.1
 
 - remove metadata validation, this will take place exclusively at the API level
