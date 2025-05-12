@@ -30,7 +30,7 @@ rule all:
     input:
         "aquamis/reports/summary_report.tsv",
         "geuebt_export/metadata.tsv",
-        "nrls_export/sucess.flag" if config["export_nrls"] == True else "",
+        "nrls_export/sucess.flag",
 
 
 # Includes --------------------------------------------------------------------
