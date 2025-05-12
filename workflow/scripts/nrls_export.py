@@ -39,6 +39,7 @@ def main(metadata, ssheet, outdir):
     os.makedirs(outdir, exist_ok=True)
     # load metadata and ssheet as df
     metatbl = pd.read_csv(metadata, sep="\t", index_col="isolate_id")
+    metatbl = metatbl.fillna('')
     # Only for subset of sample types !!!
     selected_meta = metatbl.loc[(metatbl["sample_type"].isin(EXPORT_CONDITIONS)) & (metatbl["third_party_owner"]=="")]
     ssheet = pd.read_csv(ssheet, sep="\t", index_col="sample")
