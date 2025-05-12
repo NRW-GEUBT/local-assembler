@@ -1,3 +1,7 @@
+### 1.0.4
+
+- Multiple Bugfix NRL export
+
 ### 1.0.3
 
 - Fix filtering of samples to export for NRLs

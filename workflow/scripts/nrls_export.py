@@ -42,9 +42,9 @@ def main(metadata, ssheet, outdir):
     metatbl = metatbl.fillna('')
     # Only for subset of sample types !!!
     selected_meta = metatbl.loc[(metatbl["sample_type"].isin(EXPORT_CONDITIONS)) & (metatbl["third_party_owner"]=="")]
-    ssheet = pd.read_csv(ssheet, sep="\t", index_col="sample")
+    ssheettbl = pd.read_csv(ssheet, sep="\t", index_col="sample")
     # left join on metadata
-    tbl = pd.merge(selected_meta, ssheet, how="left", left_index=True, right_index=True)
+    tbl = pd.merge(selected_meta, ssheettbl, how="left", left_index=True, right_index=True)
     # for each species:
     for species in tbl["organism"].unique():
         checksums, metanrl = [], []
@@ -53,26 +53,24 @@ def main(metadata, ssheet, outdir):
         os.makedirs(os.path.join(outdir, species_fmt), exist_ok=True)
         # select by org
         subtbl = tbl.loc[tbl["organism"] == species]
+        subtbl = subtbl.reset_index()
         # for each sample:
         for row in subtbl.iterrows():  # yields (index, Series)
             for fastqpath in zip([row[1]["fq1"], row[1]["fq2"]], ["R1", "R2"]):
                 # rename files with isolate_id
-                renamed = os.path.join(outdir, species_fmt, f"{row[0]}_{fastqpath[1]}.fastq.gz")
-
+                renamed = os.path.join(outdir, species_fmt, f"{row[1]['isolate_id']}_{fastqpath[1]}.fastq.gz")
                 # Symlink fastq
                 try:
                     os.symlink(os.path.abspath(fastqpath[0]), renamed)
                 except FileExistsError:
                     os.remove(renamed)
                     os.symlink(os.path.abspath(fastqpath[0]), renamed)
-
                 # get checksum
-                checksums.append(f"{md5(renamed)}  {row[0]}_{fastqpath[1]}.fastq.gz")
-
+                checksums.append(f"{md5(renamed)}  {row[1]['isolate_id']}_{fastqpath[1]}.fastq.gz")
             # create a one row df for metadata
             metanrl.append(pd.DataFrame.from_dict(
                 {row[0]: [
-                    row[0], # SequenzID_Einsender
+                    row[1]["isolate_id"], # SequenzID_Einsender
                     "fastq", # Art_Sequenzdaten
                     row[1]["sequencing_instrument"], # Sequenziergerät
                     "<FILL IN ID>", # EinsenderID
