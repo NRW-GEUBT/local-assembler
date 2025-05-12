@@ -1,3 +1,7 @@
+### 1.0.3
+
+- Fix filtering of samples to export for NRLs
+
 ### 1.0.2
 
 - Symlinks are now absolute paths
