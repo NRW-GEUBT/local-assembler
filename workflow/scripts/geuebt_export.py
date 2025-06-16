@@ -29,11 +29,12 @@ def md5(fname):
     return hash_md5.hexdigest()
 
 
-def main(summary, metadata_in, assembly_path, fasta_dest, metadata_out):
+def main(summary, sample_sheet, metadata_in, assembly_path, fasta_dest, metadata_out):
     qc = []
     # load metadata and summary
     metatbl = pd.read_csv(metadata_in, sep="\t", index_col="isolate_id")
     sumtbl = pd.read_csv(summary, sep="\t", index_col="Sample_Name")
+    fastq_tbl = pd.read_csv(sample_sheet, sep="\t", index_col="sample")
     # Insert assembly method
     metatbl['assembly_method'] = "AQUAMIS"
     # for each assembly
@@ -63,6 +64,8 @@ def main(summary, metadata_in, assembly_path, fasta_dest, metadata_out):
         new_cols = [
                 "fasta_name",
                 "fasta_md5",
+                "fastq_R1_md5",
+                "fastq_R2_md5",
                 "seq_depth",
                 "ref_coverage",
                 "q30"
@@ -72,6 +75,8 @@ def main(summary, metadata_in, assembly_path, fasta_dest, metadata_out):
             {name: [
                 os.path.basename(fastaname),
                 md5(fastaname),
+                md5(fastq_tbl.loc[name, "fq1"]),
+                md5(fastq_tbl.loc[name, "fq2"]),
                 sumtbl.at[name, "Coverage_Depth"],
                 sumtbl.at[name, "Reference_Coverage"],
                 sumtbl.at[name, "Q30_Base_Fraction"]
@@ -92,6 +97,7 @@ def main(summary, metadata_in, assembly_path, fasta_dest, metadata_out):
 if __name__ == "__main__":
     main(
         snakemake.input["summary"],
+        snakemake.input["sample_sheet"],
         snakemake.params["metadata"],
         snakemake.params["assembly_path"],
         snakemake.params["fasta_destination"],

@@ -45,7 +45,7 @@ def main(ssheet, metadata, sheetout):
             # add isolate id to reindexing
             new_index.append(selection.iloc[0]["isolate_id"])
 
-    # resindex
+    # reindex
     sample_sheet.reset_index(inplace=True, names="fastq_name")
     reindexed_sheet = sample_sheet.set_index(pd.Index(new_index))
     reindexed_sheet.index.name = "sample"

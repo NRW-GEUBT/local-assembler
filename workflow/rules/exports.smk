@@ -5,6 +5,7 @@
 rule geuebt_export:
     input:
         summary="aquamis/reports/summary_report.tsv",
+        sample_sheet="sample_sheet/samples_isolate_ids.tsv",
     output:
         metatbl="geuebt_export/metadata.tsv",
     params:

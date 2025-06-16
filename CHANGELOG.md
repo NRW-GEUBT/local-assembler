@@ -1,3 +1,7 @@
+### 1.1.0
+
+- Clalculate and add FASTQ md5 to metadata JSON for Geübt export
+
 ### 1.0.4
 
 - Multiple Bugfix NRL export
