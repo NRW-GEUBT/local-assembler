@@ -1,6 +1,10 @@
+### 1.1.1
+
+- Fix parsing failure if metadata.tsv was written under windows with ANSI encoding
+
 ### 1.1.0
 
-- Clalculate and add FASTQ md5 to metadata JSON for Geübt export
+- Calculate and add FASTQ md5 to metadata JSON for Geübt export
 
 ### 1.0.4
 

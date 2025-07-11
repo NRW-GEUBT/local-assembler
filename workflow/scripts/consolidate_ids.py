@@ -15,10 +15,21 @@ except NameError:
 import pandas as pd
 
 
+def decode_csv(path, *args, **kwargs):
+    """
+    Attempt to read_csv with utf-8 encoding and falls back to ANSI if it fails
+    Return a detaframe
+    """
+    try:
+        return pd.read_csv(path, *args, encoding="utf-8", **kwargs)
+    except UnicodeDecodeError:
+        return pd.read_csv(path, *args, encoding="cp1252", **kwargs)
+
+
 def main(ssheet, metadata, sheetout):
     # load metadata and samplesheet
-    metatbl = pd.read_csv(metadata, sep="\t", index_col=False)
-    sample_sheet = pd.read_csv(ssheet, sep="\t", index_col="sample")
+    metatbl = decode_csv(metadata, sep="\t", index_col=False)
+    sample_sheet = decode_csv(ssheet, sep="\t", index_col="sample")
     new_index = []
     # for each fastq pair, check that there is a corresponding entry in metadata
     for sname in sample_sheet.index.to_list():
