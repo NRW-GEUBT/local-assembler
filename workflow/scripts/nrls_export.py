@@ -34,15 +34,26 @@ def md5(fname):
     return hash_md5.hexdigest()
 
 
+def decode_csv(path, *args, **kwargs):
+    """
+    Attempt to read_csv with utf-8 encoding and falls back to ANSI if it fails
+    Return a detaframe
+    """
+    try:
+        return pd.read_csv(path, *args, encoding="utf-8", **kwargs)
+    except UnicodeDecodeError:
+        return pd.read_csv(path, *args, encoding="cp1252", **kwargs)
+
+
 def main(metadata, ssheet, outdir):
     # make outdir
     os.makedirs(outdir, exist_ok=True)
     # load metadata and ssheet as df
-    metatbl = pd.read_csv(metadata, sep="\t", index_col="isolate_id")
+    metatbl = decode_csv(metadata, sep="\t", index_col="isolate_id")
     metatbl = metatbl.fillna('')
     # Only for subset of sample types !!!
     selected_meta = metatbl.loc[(metatbl["sample_type"].isin(EXPORT_CONDITIONS)) & (metatbl["third_party_owner"]=="")]
-    ssheettbl = pd.read_csv(ssheet, sep="\t", index_col="sample")
+    ssheettbl = decode_csv(ssheet, sep="\t", index_col="sample")
     # left join on metadata
     tbl = pd.merge(selected_meta, ssheettbl, how="left", left_index=True, right_index=True)
     # for each species:

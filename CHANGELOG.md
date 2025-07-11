@@ -1,3 +1,7 @@
+### 1.1.2
+
+- More ANSI Fix
+
 ### 1.1.1
 
 - Fix parsing failure if metadata.tsv was written under windows with ANSI encoding

@@ -29,12 +29,23 @@ def md5(fname):
     return hash_md5.hexdigest()
 
 
+def decode_csv(path, *args, **kwargs):
+    """
+    Attempt to read_csv with utf-8 encoding and falls back to ANSI if it fails
+    Return a detaframe
+    """
+    try:
+        return pd.read_csv(path, *args, encoding="utf-8", **kwargs)
+    except UnicodeDecodeError:
+        return pd.read_csv(path, *args, encoding="cp1252", **kwargs)
+
+
 def main(summary, sample_sheet, metadata_in, assembly_path, fasta_dest, metadata_out):
     qc = []
     # load metadata and summary
-    metatbl = pd.read_csv(metadata_in, sep="\t", index_col="isolate_id")
-    sumtbl = pd.read_csv(summary, sep="\t", index_col="Sample_Name")
-    fastq_tbl = pd.read_csv(sample_sheet, sep="\t", index_col="sample")
+    metatbl = decode_csv(metadata_in, sep="\t", index_col="isolate_id")
+    sumtbl = decode_csv(summary, sep="\t", index_col="Sample_Name")
+    fastq_tbl = decode_csv(sample_sheet, sep="\t", index_col="sample")
     # Insert assembly method
     metatbl['assembly_method'] = "AQUAMIS"
     # for each assembly
