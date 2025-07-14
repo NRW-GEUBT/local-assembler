@@ -12,6 +12,8 @@ workdir: .tests/integration
 fastq_folder: data
 # path to metadata file
 metadata: data/metadata.tsv
+# Name of the sequencing run for all samples in the sample list
+run_name: ""
 
 # Additional parameters
 # ---------------------

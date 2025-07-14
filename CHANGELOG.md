@@ -1,3 +1,8 @@
+### 1.2.0
+
+- Add `--fix_fails`to AQUAMIS run options
+- Add the possibility of specifying a run name to AQUAMIS with the `run_name` parameter
+
 ### 1.1.2
 
 - More ANSI Fix

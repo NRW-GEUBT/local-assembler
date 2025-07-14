@@ -48,6 +48,7 @@ checkpoint aquamis:
     params:
         max_threads_sample=config["max_threads_sample"],
         qc_schema=f"{workflow.basedir}/schema/AQUAMIS_thresholds.json",
+        run_name=f"-r {config["run_name"]}" if config["run_name"] else "",
     conda:
         "../envs/aquamis.yaml"
     threads: workflow.cores
@@ -61,5 +62,6 @@ checkpoint aquamis:
             --threads {threads} \
             --threads_sample {params.max_threads_sample} \
             --remove_temp --ephemeral \
-            --qc_thresholds {params.qc_schema}
+            --qc_thresholds {params.qc_schema} \
+            --fix_fails {params.run_name}
         """

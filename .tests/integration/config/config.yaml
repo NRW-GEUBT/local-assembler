@@ -7,6 +7,7 @@ workdir: .tests/integration
 fastq_folder: data
 # path to metadata file
 metadata: data/metadata.tsv
+run_name: ""
 
 # max threads per parallel job
 max_threads_sample: 1
