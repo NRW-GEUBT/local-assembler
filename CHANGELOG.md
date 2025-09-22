@@ -1,3 +1,7 @@
+### 1.2.1
+
+- Change upper warning for Listeria SNV count from 3 to 11. This is to reflect experience of the NRL with many cases of Listeria showing high SNV counts.
+
 ### 1.2.0
 
 - Add `--fix_fails`to AQUAMIS run options

@@ -229,8 +229,8 @@
     "Listeria": {
       "NumContamSNVs": [
         {
-          "source": "Curated_Genus_specific_BfR",
-          "interval": [2, 3],
+          "source": "Curated_Genus_specific_BfR - mod 22.09.2025 upper warning set to 11",
+          "interval": [2, 11],
           "binscore": [0, 1, 2],
           "bincolor": ["#81B294", "#F2CC8F", "#E07A5F"]
         }
