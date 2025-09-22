@@ -308,8 +308,8 @@
       ],
       "Total length": [
         {
-          "source": "ASU L 00.00-183",
-          "interval": [4300000, 4627000, 5006000, 5200000],
+          "source": "ASU L 00.00-183 - mod. 22.09.2025 set upper fail to 6.5Mb",
+          "interval": [4300000, 4627000, 5200000, 6500000],
           "binscore": [2, 1, 0, 1, 2],
           "bincolor": ["#E07A5F", "#F2CC8F", "#81B294", "#F2CC8F", "#E07A5F"],
           "expansionFactor": [0.05]

@@ -1,6 +1,7 @@
 ### 1.2.1
 
 - Change upper warning for Listeria SNV count from 3 to 11. This is to reflect experience of the NRL with many cases of Listeria showing high SNV counts.
+- Change upper fail for Salmonella assembly length to 6.5 Mb. This reflects experience of the NRL with large Salmonella assemblies.
 
 ### 1.2.0
 
