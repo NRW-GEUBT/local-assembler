@@ -35,18 +35,18 @@
       ],
       "contig_hit1_genus_fraction": [
         {
-          "source": "BfR_default",
-          "interval": [0.95],
-          "binscore": [2, 0],
-          "bincolor": ["#E07A5F", "#81B294"]
+          "source": "ASU L 00.00-183",
+          "interval": [0.9, 0.95],
+          "binscore": [2, 1, 0],
+          "bincolor": ["#E07A5F", "#F2CC8F", "#81B294"]
         }
       ],
       "contig_hit1_species_fraction": [
         {
-          "source": "BfR_default",
-          "interval": [0.95],
-          "binscore": [2, 0],
-          "bincolor": ["#E07A5F", "#81B294"]
+          "source": "ASU L 00.00-183",
+          "interval": [0.9, 0.95],
+          "binscore": [2, 1, 0],
+          "bincolor": ["#E07A5F", "#F2CC8F", "#81B294"]
         }
       ],
       "mlst_multi_allele_loci": [

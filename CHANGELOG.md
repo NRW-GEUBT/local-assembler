@@ -1,3 +1,7 @@
+### 1.2.2
+
+- Change the "contig_hit1_genus_fraction" and "contig_hit1_species_fraction" thresholds to FAIL under 0.9 instead of 0.95, in accordance to ASU L 00.00-183. Values between 0.9 and 0.95 will issue a WARNING.
+
 ### 1.2.1
 
 - Change upper warning for Listeria SNV count from 3 to 11. This is to reflect experience of the NRL with many cases of Listeria showing high SNV counts.
